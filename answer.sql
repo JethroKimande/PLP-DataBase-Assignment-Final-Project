@@ -1,42 +1,18 @@
+-- Create the database for the Library Management System
 CREATE DATABASE library_db;
 
+-- Switch to the newly created database
 USE library_db;
 
+-- Table for storing author information
 CREATE TABLE Authors (
-    author_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
+    author_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique identifier for each author
+    name VARCHAR(255) NOT NULL  -- Author's full name, required
 );
 
+-- Table for storing book details
 CREATE TABLE Books (
-    book_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    isbn VARCHAR(13) UNIQUE NOT NULL,
-    publication_year YEAR,
-    genre VARCHAR(100)
-);
-
-CREATE TABLE Book_Authors (
-    book_id INT,
-    author_id INT,
-    PRIMARY KEY (book_id, author_id),
-    FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE,
-    FOREIGN KEY (author_id) REFERENCES Authors(author_id) ON DELETE CASCADE
-);
-
-CREATE TABLE Members (
-    member_id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) UNIQUE NOT NULL,
-    join_date DATE NOT NULL
-);
-
-CREATE TABLE Borrowings (
-    borrowing_id INT AUTO_INCREMENT PRIMARY KEY,
-    book_id INT NOT NULL,
-    member_id INT NOT NULL,
-    borrow_date DATE NOT NULL,
-    due_date DATE NOT NULL,
-    return_date DATE,
-    FOREIGN KEY (book_id) REFERENCES Books(book_id) ON DELETE CASCADE,
-    FOREIGN KEY (member_id) REFERENCES Members(member_id) ON DELETE CASCADE
-)
+    book_id INT AUTO_INCREMENT PRIMARY KEY,  -- Unique identifier for each book
+    title VARCHAR(255) NOT NULL,  -- Book title, required
+    isbn VARCHAR(13) UNIQUE NOT NULL,  -- ISBN number, unique and required
+    publication_year YEAR,  -- Year of publication
